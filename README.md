@@ -41,6 +41,11 @@ python3 main.py --env-name "PongNoFrameskip-v4"  --num-processes 45 --priors 3 -
 ## Choosing your visual priors:
 Go into segment.py and uncomment the block that corresponds with the visual prior you want.
 Some priors have two options (priors 1 or prior s2), you can select your choice by adding --priors 1/2 into your script.
+## Watch your model play:
+Ensure the environment is the same of which your model was trained on. This script will show you live gameplay of your latest trained model.
+```bash
+python enjoy.py --load-dir trained_models/a2c --env-name "PongNoFrameskip-v4"
+```
 
 ## Contact me!
 If you have any questions feel free to email me at zcahika@ucl.ac.uk

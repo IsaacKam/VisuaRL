@@ -9,4 +9,6 @@ comment line 26 on model.py out and uncomment line 27
 ## ASRL Intructions:
 change branch to RLDO and run.
 
-'python3 ./main.py --env-name "PongNoFrameskip-v4"  --num-processes 45 --priors 1 --key-value 1 --log-dir logs_spare/Pong_folder/ASRL_SEG/Segm_no_mult_kv-0 --game Pong '
+```bash
+python3 ./main.py --env-name "PongNoFrameskip-v4"  --num-processes 45 --priors 1 --key-value 1 --log-dir logs_spare/Pong_folder/ASRL_SEG/Segm_no_mult_kv-0 --game Pong 
+```

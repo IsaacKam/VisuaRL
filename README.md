@@ -39,7 +39,7 @@ change branch to RLDO and run.
 python3 main.py --env-name "PongNoFrameskip-v4"  --num-processes 45 --priors 3 --key-value 1 --log-dir log/test   --game Pong 
 ```
 
-## Choosing your visual priors intructions:
+## Choosing your visual priors:
 Go into segment.py and uncomment the block that corresponds with the visual prior you want.
 Some priors have two options (priors 1 or prior s2), you can select your choice by adding --priors 1/2 into your script.
 

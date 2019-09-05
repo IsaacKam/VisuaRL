@@ -2,26 +2,41 @@
 This is part of my Msc Machine Learning thesis at UCL titled:  ' Leveraging Visual priors for deep reinforcement learning'
 
 Our models are compatible with any of the Atari Gym environments. We use Pong as an example in the bash scripts below.
+In order to install requirements, follow:
+
+## Installation
+```bash
+# PyTorch
+conda install pytorch torchvision -c soumith
+
+# Baselines for Atari preprocessing
+git clone https://github.com/openai/baselines.git
+cd baselines
+pip install -e .
+
+# Other requirements
+pip install -r requirements.txt
+```
 
 ## Segmenter Intructions:
 This is the preset model
 ```bash
-python3 main.py --env-name "PongNoFrameskip-v4"  --num-processes 45 --log-dir test 
+python3 main.py --env-name "PongNoFrameskip-v4"  --num-processes 45 --log-dir log/test 
 ```
 ## K2VS Intructions:
 Add --key-value 1 to your bash script
 ```bash
-python3 main.py --env-name "PongNoFrameskip-v4"  --num-processes 45 ---key-value 1 --log-dir test 
+python3 main.py --env-name "PongNoFrameskip-v4"  --num-processes 45 ---key-value 1 --log-dir log/test  
 ```
 ## RLINE Intructions:
 comment line 26 on model.py out and uncomment line 27
 ```bash
-python3 main.py --env-name "PongNoFrameskip-v4"  --num-processes 45 log-dir test 
+python3 main.py --env-name "PongNoFrameskip-v4"  --num-processes 45 log-dir log/test  
 ```
 ## ASRL Intructions:
 change branch to RLDO and run.
 ```bash
-python3 main.py --env-name "PongNoFrameskip-v4"  --num-processes 45 --priors 3 --key-value 1 --log-dir test  --game Pong 
+python3 main.py --env-name "PongNoFrameskip-v4"  --num-processes 45 --priors 3 --key-value 1 --log-dir log/test   --game Pong 
 ```
 
 ## Choosing your visual priors intructions:

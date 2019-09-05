@@ -34,7 +34,6 @@ comment line 26 on model.py out and uncomment line 27
 python3 main.py --env-name "PongNoFrameskip-v4"  --num-processes 45 log-dir log/test  
 ```
 ## ASRL Intructions:
-change branch to RLDO and run.
 ```bash
 python3 main.py --env-name "PongNoFrameskip-v4"  --num-processes 45 --priors 3 --key-value 1 --log-dir log/test   --game Pong 
 ```

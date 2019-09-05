@@ -17,6 +17,7 @@ pip install -e .
 # Other requirements
 pip install -r requirements.txt
 ```
+Due to the computational intensity of the RL, this model has been optimised for use for GPUs and won't currently work on CPUs.
 
 ## Segmenter Intructions:
 This is the preset model

@@ -1,5 +1,5 @@
-# VisuaRL
-Code for  K2VS, RLINE, ASRL and segmenter. This is part of my Msc Machine Learning thesis at UCL titled:  ' Leveraging Visual 
+# VisuaRL: Code for K2VS, RLINE, ASRL and the Segmenter
+This is part of my Msc Machine Learning thesis at UCL titled:  ' Leveraging Visual priors for deep reinforcement learning'
 ## Segmenter Intructions:
 This is the preset model
 ## K2VS Intructions:

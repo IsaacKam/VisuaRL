@@ -27,13 +27,13 @@ args = get_args()
 
 #         pca = PCAProjectNetALL()
 
+if args.priors == 3:
 
-# print("BOOM")
-# dict = torch.load('seg_models/'+args.game+'.pth')
-# netEncM = models._netEncM(sizex=128, nIn=3, nMasks=2, nRes=1,nf=64, temperature=1).cuda()
-# netEncM.load_state_dict(dict,strict= False)
-# for param in netEncM.parameters():
-#     param.requires_grad = False
+  dict = torch.load('seg_models/'+args.game+'.pth')
+  netEncM = models._netEncM(sizex=128, nIn=3, nMasks=2, nRes=1,nf=64, temperature=1).cuda()
+  netEncM.load_state_dict(dict,strict= False)
+  for param in netEncM.parameters():
+      param.requires_grad = False
 
 def mask_maker(image_list,priors,device):
   
@@ -43,19 +43,8 @@ def mask_maker(image_list,priors,device):
     num_of_images = image_list.shape[1]
 
 
-    # input_extended = F.interpolate( init[:,6:9,:,:]/255, size=(128, 128), mode='bilinear', align_corners=False) 
-    # netEncM.eval()
-    # masks =  F.interpolate( netEncM(input_extended), size=(84, 84), mode='bilinear', align_corners=False) 
-    # greyscale_input =  (0.07 * init[:,8,:,:] + 0.72 * init[:,7,:,:] + 0.21 * init[:,6,:,:]).unsqueeze(1)
-    # if priors == 1:
-    #     features = masks
-        
-    # else:
-    #     features = masks*greyscale_input
-    
-    # # vutils.save_image(features[2].unsqueeze(1),"goo.png", normalize=True, nrow=7)
-    # all_images = (torch.cat([init,features],1).cuda())
 
+#  DDT - Colour
     # image_list = F.interpolate(image_list.unsqueeze(1).repeat(1,3,1,1,1).view(1,-1,proces,84,84).squeeze().transpose(0,1), size=(224, 224), mode='bilinear', align_corners=False)
    
     # image_list = image_list.view(proces*num_of_images, 3,224, 224)/255 
@@ -83,7 +72,6 @@ def mask_maker(image_list,priors,device):
     # third_maxv = third_project_map.view(third_project_map.size(0), -1).max(dim=1)[0].unsqueeze(1).unsqueeze(1)
     # third_project_map /= third_maxv
     # third_project_map = (F.interpolate(third_project_map.unsqueeze(1), size=(84, 84), mode='bilinear', align_corners=False) ).view(proces,1,84,84)
-    
 
     # check = first_project_map[0,0,0,0]
     
@@ -102,114 +90,69 @@ def mask_maker(image_list,priors,device):
     #     print("NAN Error, Third Mask")
     #     third_project_map = init[:,6:9,:,:]
 
-    # greyscale_input =  (0.07 * init[:,8,:,:] + 0.72 * init[:,7,:,:] + 0.21 * init[:,6,:,:]).unsqueeze(1)
 
-    # all_images = torch.cat([init,first_project_map*greyscale_input,second_project_map*greyscale_input,third_project_map*greyscale_input],1)
-    # vutils.save_image(all_images[2].unsqueeze(1),"goo.png", normalize=True, nrow=7)
 
-    # first_project_map = torch.clamp(segmented[0], min=0)
-    # first_maxv = first_project_map.view(first_project_map.size(0), -1).max(dim=1)[0].unsqueeze(1)
-    # first_project_map /= first_maxv
-    # first_project_map = (F.interpolate(first_project_map.unsqueeze(1), size=(84, 84), mode='bilinear', align_corners=False) ).view(proces,4,84,84)
 
-    # second_project_map = torch.clamp(segmented[1], min=0)
-    # second_maxv = second_project_map.view(second_project_map.size(0), -1).max(dim=1)[0].unsqueeze(1).unsqueeze(1)
-    # second_project_map /= second_maxv
-    # second_project_map = (F.interpolate(second_project_map.unsqueeze(1), size=(84, 84), mode='bilinear', align_corners=False) ).view(proces,4,84,84)
 
-    # third_project_map = torch.clamp(segmented[2], min=0)
-    # third_maxv = third_project_map.view(third_project_map.size(0), -1).max(dim=1)[0].unsqueeze(1).unsqueeze(1)
-    # third_project_map /= third_maxv
-    # third_project_map = (F.interpolate(third_project_map.unsqueeze(1), size=(84, 84), mode='bilinear', align_corners=False) ).view(proces,4,84,84)
 
-    # first_mean = torch.mean(first_project_map,1)
-   
-
-    # check = first_mean[0,0,0]
-    
-    # if check != check:
-    #     print("NAN Error, First Mask")
-    #     first_mean = init[:,2,:,:]
-
-    # second_mean = torch.mean(second_project_map,1)
-    # check = second_mean[0,0,0]
-    # if check != check:
-    #     print("NAN Error, Second Mask")
-    #     second_mean = init[:,2,:,:]
-    
-    # third_mean = torch.mean(third_project_map,1)
-    # check = third_mean[0,0,0]
-
-    # if check != check:
-    #     print("NAN Error, Third Mask")
-    #     third_mean = init[:,2,:,:]
-    
-    # all_images = torch.cat([init,first_mean.unsqueeze(1)*init[:,2,:,:].unsqueeze(1),second_mean.unsqueeze(1)*init[:,2,:,:].unsqueeze(1),third_mean.unsqueeze(1)*init[:,2,:,:].unsqueeze(1)],1)
-#     print(all_images[2].shape)
-#     vutils.save_image(all_images[2].unsqueeze(1),"goo.png", normalize=True, nrow=7)
-#     .view(-1,opt.nx,opt.sizex, opt.sizex), os.path.join(opt.outf, "test_out_%05d.png" % opt.iteration), normalize=True, range=(-1,1), nrow=opt.nTest+4)
-
-    # print('init',init[:,2,:,:])
-    # print('cdd',first_mean)
-    # print('ffe',first_mean.unsqueeze(1)*init[:,2,:,:])
-    if priors == 1:
-        segs = np.zeros((proces, 3, 84, 84))
-        numpy_obs = np.uint8(init.permute(0,2, 3, 1).cpu().detach().numpy())  
+    # Graduated Canny - Colour Prior 2 is same intensity 3 different images, prior 1 - is different intensities
+    segs = np.zeros((proces, 3, 84, 84))
+    numpy_obs = np.uint8(init.permute(0,2, 3, 1).cpu().detach().numpy())  
+    if priors == 2:
+        
 #         #     # Original Canny
 #         # for i in range(proces):
 #         #     segs[i,0,:,:] = cv2.Canny(numpy_obs[i,0,:,:],400,600)
 #         #     segs[i,1,:,:] = cv2.Canny(numpy_obs[i,1,:,:],400,600)
 #         #     segs[i,2,:,:] = cv2.Canny(numpy_obs[i,2,:,:],400,600)
-#         #     segs[i,3,:,:] = cv2.Canny(numpy_obs[i,3,:,:],400,600)
 
-        
+    elif priors ==1:    
 #         # #      Graduated Canny
         for i in range(proces):
             segs[i,0,:,:] = cv2.Canny(numpy_obs[i,:,:,6:9],100,150)
             segs[i,1,:,:] = cv2.Canny(numpy_obs[i,:,:,6:9],300,500)
             segs[i,2,:,:] = cv2.Canny(numpy_obs[i,:,:,6:9],540,550)
 
-        vutils.save_image( torch.from_numpy(segs[2]).float().unsqueeze(1),"goo.png", normalize=True, nrow=7)
+        # vutils.save_image( torch.from_numpy(segs[2]).float().unsqueeze(1),"goo.png", normalize=True, nrow=7)
 
         all_images = torch.cat([init,  torch.from_numpy(segs).float().cuda()],1).cuda()
 
-# # #  Random
+
+
+
+# # #  Random 
 # #     all_images = torch.cat([init, torch.rand(proces,3,84,84)*180],1).cuda()
     
-# # #     # edges canny keypoints
-#     else:
+
+
+
+    # ASRL SEGMENTS - prior 1 is mask multiplied with input prior 2 is just masks 0
+    if priors == 3:
+      input_extended = F.interpolate( init[:,6:9,:,:]/255, size=(128, 128), mode='bilinear', align_corners=False) 
+      netEncM.eval()
+      masks =  F.interpolate( netEncM(input_extended), size=(84, 84), mode='bilinear', align_corners=False) 
+      greyscale_input =  (0.07 * init[:,8,:,:] + 0.72 * init[:,7,:,:] + 0.21 * init[:,6,:,:]).unsqueeze(1)
+      
+      features = masks
+
+     
+
+    # all_images = (torch.cat([init,features],1).cuda())
+
+ 
+
+
+
+
+
+# #     # edges canny keypoints - Colour
 #         enlarged = F.interpolate(init[:,6:9,:,:]/255, size=(256, 256), mode='bilinear', align_corners=False)
 #         enlarged= enlarged* 2  -1
-        
-#     #     segment2D = visualpriors.feature_readout(enlarged, 'segment_unsup2d', device='cuda')
-#     #     segmented = pca(segment2D)
-#     #     print(segmented[0].shape)
-
-#     #     compressed = vis_compresser(segment2D)
-#     #     print(compressed.shape)
-#         greyscale_input =  (0.07 * init[:,8,:,:] + 0.72 * init[:,7,:,:] + 0.21 * init[:,6,:,:]).unsqueeze(1)
-#         numpy_obs = np.uint8(greyscale_input.cpu().detach().numpy()) 
-#         segs = np.zeros((proces, 1, 84, 84))
-
-#         for i in range(proces):
-#             segs[i,0,:,:] = cv2.Canny(numpy_obs[i,0,:,:],250,400) 
-
-#         reshading = torch.from_numpy(segs).float().cuda()
-#         # reshading = visualpriors.feature_readout(enlarged, 'reshading', device='cuda')
+        # reshading = visualpriors.feature_readout(enlarged, 'reshading', device='cuda')
 #         edges = visualpriors.feature_readout(enlarged, 'edge_texture', device='cuda')
 #         keypoints = visualpriors.feature_readout(enlarged, 'keypoints2d', device='cuda')
-#         # reshading = cv2.Canny(init[:,6:9,:,:]/255,300,500)
-
-#         features =  (F.interpolate(torch.cat([edges,keypoints],1), size=(84, 84), mode='bilinear', align_corners=False)/ 2. + 0.5)*255
-#         features = torch.cat([features,reshading],1)
+#         features =  (F.interpolate(torch.cat([edges,keypoints,reshading],1), size=(84, 84), mode='bilinear', align_corners=False)/ 2. + 0.5)*255
 #         # vutils.save_image(features[4].unsqueeze(1),"goo1.png", normalize=True, nrow=64)
-
-#         # feature1 = visualpriors.feature_readout((init[:,3:6,:,:]/255)* 2 - 1, 'keypoints2d', device='cuda')
-#         # feature2 = visualpriors.feature_readout((init[:,6:9,:,:]/255)* 2 - 1, 'keypoints2d', device='cuda')
-#         # feature3 = visualpriors.feature_readout((init[:,9:12,:,:]/255)* 2 - 1, 'keypoints2d', device='cuda')
-#         # features =  (F.interpolate(torch.cat([feature1,feature2,feature3],1), size=(84, 84), mode='bilinear', align_corners=False)/ 2. + 0.5)*255
-
 #         all_images = (torch.cat([init,features],1).cuda())
-        # vutils.save_image(all_images[4].unsqueeze(1),"goo2.png", normalize=True, nrow=64)
 
     return all_images
